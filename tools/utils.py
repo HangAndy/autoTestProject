@@ -4,6 +4,8 @@
 import time
 from selenium import webdriver
 
+from tools.read_data import read_data
+
 
 class DriverUtil(object):
     """浏览器工具类"""
@@ -17,6 +19,17 @@ class DriverUtil(object):
         if cls._driver is None:
             cls._driver = webdriver.Chrome()
         return cls._driver
+
+    @classmethod
+    def get_account_info(cls, name):
+        """
+        读取账号
+        :return: dict
+        """
+
+        account = read_data("账号.json")  # 去读所有账号
+        if name is account.keys():
+            return account(name)
 
     @classmethod
     def quit_driver(cls):
